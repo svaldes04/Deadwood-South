@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deathwood South: Level 1</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        /* Add additional styles for the typewriter effect */
+        .text-container {
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+        .horse {
+            background-image: url(gameAssets/horse/horseframe0.png);
+            /* Replace with the path to your sprite sheet */
+            background-size: contain;
+            /* Adjust as needed */
+            width: 14.42%;
+            /* Adjust as needed */
+            aspect-ratio: 400 / 590;
+            /* Adjust as needed */
+            position: absolute;
+            top: 70%;
+            /* Adjust the percentage value to lower the position */
+            z-index: 15;
+            background-repeat: no-repeat;
+        }
+
+        .continue-button {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            /* Initially hidden */
+            transition: opacity 3.5s ease-in-out;
+            /* Fade in animation */
+            z-index: 10;
+        }
+
+        .text {
+            font-family: "Old Western", cursive;
+            font-size: 24px;
+            color: #000000;
+            padding: 20px;
+            letter-spacing: 10px;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            display: inline-block;
+        }
+
+        .cursor {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            animation: cursor-flash 0.5s infinite;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        @keyframes cursor-flash {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameScreen">
+        <div class="container">
+            <div class="text-container">
+                <p id="textBox" class="text"></p>
+                <span class="cursor">|</span>
+            </div>
+            <button id="continueButton" class="continue-button">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        const localStoragePrefix = "DeadwoodSouth_";
+        // Get player's name from sessionStorage
+        var playerName = sessionStorage.getItem("sheriffName") || ""; // default to no name
+        var selectedSkin = sessionStorage.getItem("selectedSkin"); // player skin
+        var currentLevel = sessionStorage.getItem("currentLevel");
+        // Get the element by its ID
+        var textBox = document.getElementById("textBox");
+        var cursor = document.querySelector(".cursor");
+
+
+
+        if (currentLevel == 0){
+            var textContent = "It would seems you didn't pass your sheriff training...\n\n" +
+                    "Try hitting at least 20 tumbleweed to earn your sheriff badge.\n"+
+                    "Better luck next time!";
+                typeWriter(textContent);
+        }
+
+        if (currentLevel == 1) {
+            // Check if playerName exists
+            if (playerName) {
+                    console.log(sessionStorage.getItem("selectedSkin"));
+                // If playerName exists, set the detailed welcome message with playerName
+                var textContent = "Welcome to Deadwood South, " + playerName + "!\n\n" +
+                    "You've been summoned to restore peace and order to our troubled town.\n" +
+                    "The outlaws are running wild, and the innocent folks need your protection.\n" +
+                    "Are you ready to take on the challenges that lie ahead?";
+                typeWriter(textContent);
+            } else {
+                // If playerName does not exist, set a generic welcome message
+                var textContent = "Welcome to Deadwood South!\n\n" +
+                    "You've been summoned to restore peace and order to our troubled town.\n" +
+                    "The outlaws are running wild, and the innocent folks need your protection.\n" +
+                    "Are you ready to take on the challenges that lie ahead?";
+                typeWriter(textContent);
+            }
+        }
+
+        if (currentLevel == 2) {
+            var level1ShotsMissed = sessionStorage.getItem("level1ShotsMissed");
+            var level1FinalTime = sessionStorage.getItem("level1FinalTime");
+            var level1FinalScore = sessionStorage.getItem("level1FinalScore");
+            var textContent = "Congratulations Sheriff " + playerName + "!\n\n" +
+                "You've secured your sheriff's badge and can progress to some real action!\n" +
+                "You beat level 1 with a final score of " + level1FinalScore + " \n" +
+                "There's a mission ready for you now!";
+            typeWriter(textContent);
+        }
+
+        if (currentLevel == 4) {
+            var level2ShotsMissed = sessionStorage.getItem("level2ShotsMissed");
+            var level2FinalTime = sessionStorage.getItem("level2FinalTime");
+            var textContent = "Incredible work Sheriff " + playerName + "!\n\n" +
+                "You made that look easy and put an end to our towns's terrors!\n" +
+                "You beat level 2 in " + level2FinalTime + " seconds" + " \n" +
+                "There's a mission ready for you now!";
+            typeWriter(textContent);
+        }
+        if (currentLevel == 3) {
+
+            var textContent = "Sheriff " + playerName + "!!!!\n\n" +
+                "You've made a grave mistake!\n" +
+                "You shot a civilian of Deadwood South and are being chased by the whole town! \n" +
+                "I wish you luck escaping from Deadwood. You must never return";
+            typeWriter(textContent);
+        }
+        if (currentLevel == 5) {
+            var playerName = sessionStorage.getItem("sheriffName") || ""; // default to no name
+            var selectedSkin = sessionStorage.getItem("selectedSkin"); // player skin
+            var gold = sessionStorage.getItem("gold");
+            console.log("Gold:", gold);
+
+            var vetBill = sessionStorage.getItem("vetBills");
+            console.log("Vet Bill:", vetBill);
+
+            var totalMoney = parseInt(gold) - parseInt(vetBill);
+            console.log("Total Money:", totalMoney);
+
+            var level1FinalTime = sessionStorage.getItem("level1FinalTime");
+            console.log("Level 1 Final Time:", level1FinalTime);
+
+            var level2FinalTime = sessionStorage.getItem("level2FinalTime");
+            console.log("Level 2 Final Time:", level2FinalTime);
+
+            var level1Score = sessionStorage.getItem("level1FinalScore");
+            console.log("Level 1 Score:", level1Score);
+
+            var level4FinalTime = 60;
+            console.log("Level 4 Final Time:", level4FinalTime);
+
+            var level2ShotsMissed = sessionStorage.getItem("level2ShotsMissed");
+            console.log("Level 2 Shots Missed:", level2ShotsMissed);
+
+            var level1ShotsMissed = sessionStorage.getItem("level1ShotsMissed");
+            console.log("Level 1 Shots Missed:", level1ShotsMissed);
+
+            var overallTime = parseInt(level1FinalTime) + parseInt(level2FinalTime) + parseInt(level4FinalTime);
+            console.log("Overall Time:", overallTime);
+
+            var TimePenalty = overallTime * 10;
+            console.log("Time Penalty:", TimePenalty);
+
+            var shotsMissed = parseInt(level1ShotsMissed) + parseInt(level2ShotsMissed);
+            console.log("Total Shots Missed:", shotsMissed);
+            console.log(shotsMissed);
+            var shotsMissedPen = shotsMissed * 10;
+            var flawlessRun = false;
+            var flawlessBonus = 0;
+
+            if (shotsMissed <= 0) {
+                flawlessRun = true;
+                shotsMissed == 0;
+                flawlessBonus = 1000;
+            }
+            console.log("totalMoney" + totalMoney);
+            console.log("level1finalscore" + level1Score);
+            console.log("shotsmissed" + shotsMissed);
+            console.log("timepen" + TimePenalty);
+            console.log("flawlessBonus" + flawlessBonus);
+            console.log("totalMoney" + parseInt(totalMoney));
+            console.log("level1finalscore" + parseInt(level1Score));
+            console.log("shotsmissed" + parseInt(shotsMissed));
+            console.log("timepen" + parseInt(TimePenalty));
+            console.log("flawlessBonus" + parseInt(flawlessBonus));
+            var finalScore = parseInt(totalMoney) + parseInt(level1Score) - parseInt(shotsMissedPen) - parseInt(TimePenalty) + parseInt(flawlessBonus);
+            console.log(finalScore);
+            var textContent =
+                "What a show, Sheriff " + playerName + "!\n\n" +
+                "You truly saved the day there!\n" +
+                "You finished level 4 with $" + gold + " dollars worth of gold and $" + vetBill + " of vet bills.\n" +
+                `Your total (including level 1 score of ${level1Score}): $${parseInt(level1Score) + totalMoney} \n` +
+                "Time Taken: " + overallTime + "s -> -" + TimePenalty + " points\n" +
+                "Shots Missed: " + shotsMissed + " -> -" + shotsMissedPen + " points\n" +
+                "Flawless Run: " + flawlessRun + "\n" +
+                "Your final score: $" + finalScore + "\n";
+            console.log("calling store player data");
+            // Store the player's data
+
+            console.log("im in level 5");
+            console.log("Storing data:");
+            console.log("Player Name:", playerName);
+            console.log("Selected Skin:", selectedSkin);
+            console.log("Final Score:", finalScore);
+
+            if (finalScore >= parseInt(localStorage.getItem("1stPlaceScore")) || localStorage.getItem("1stPlaceScore") == null || localStorage.getItem("1stPlaceScore") == "null") {
+                var tempScore = localStorage.getItem("1stPlaceScore")
+                var tempSkin = localStorage.getItem("1stPlaceSkin")
+                var tempName = localStorage.getItem("1stPlaceName")
+                var tempScore2 = localStorage.getItem("2ndPlaceScore")
+                var tempSkin2 = localStorage.getItem("2ndPlaceSkin")
+                var tempName2 = localStorage.getItem("2ndPlaceName")
+                localStorage.setItem("1stPlaceName", playerName);
+                localStorage.setItem("1stPlaceSkin", selectedSkin);
+                localStorage.setItem("1stPlaceScore", finalScore);
+
+                localStorage.setItem("2ndPlaceName", tempName);
+                localStorage.setItem("2ndPlaceSkin", tempSkin);
+                localStorage.setItem("2ndPlaceScore", tempScore);
+
+
+                localStorage.setItem("3rdPlaceName", tempName2);
+                localStorage.setItem("3rdPlaceSkin", tempSkin2);
+                localStorage.setItem("3rdPlaceScore", tempScore2);
+
+            }
+            if ((finalScore >= parseInt(localStorage.getItem("2ndPlaceScore")) || localStorage.getItem("2ndPlaceScore") == null || localStorage.getItem("2ndPlaceScore") == "null") && finalScore < parseInt(localStorage.getItem("1stPlaceScore"))) {
+                var tempScore2 = localStorage.getItem("2ndPlaceScore")
+                var tempSkin2 = localStorage.getItem("2ndPlaceSkin")
+                var tempName2 = localStorage.getItem("2ndPlaceName")
+                localStorage.setItem("2ndPlaceName", playerName);
+                localStorage.setItem("2ndPlaceSkin", selectedSkin);
+                localStorage.setItem("2ndPlaceScore", finalScore);
+
+
+                localStorage.setItem("3rdPlaceName", tempName2);
+                localStorage.setItem("3rdPlaceSkin", tempSkin2);
+                localStorage.setItem("3rdPlaceScore", tempScore2);
+            }
+            if ((finalScore >= parseInt(localStorage.getItem("3rdPlaceScore")) || localStorage.getItem("3rdPlaceScore") == null || localStorage.getItem("3rdPlaceScore") == "null") && finalScore < parseInt(localStorage.getItem("2ndPlaceScore"))) {
+                localStorage.setItem("3rdPlaceName", playerName);
+                localStorage.setItem("3rdPlaceSkin", selectedSkin);
+                localStorage.setItem("3rdPlaceScore", finalScore);
+            }
+
+
+
+
+
+            typeWriter(textContent);
+        } else if(currentLevel == 6){
+            var playerName = sessionStorage.getItem("sheriffName") || ""; // default to no name
+            var selectedSkin = sessionStorage.getItem("selectedSkin"); // player skin
+
+            var level1FinalTime = sessionStorage.getItem("level1FinalTime");
+            console.log("Level 1 Final Time:", level1FinalTime);
+
+            var level2FinalTime = sessionStorage.getItem("level2FinalTime");
+            console.log("Level 2 Final Time:", level2FinalTime);
+
+            var level1Score = sessionStorage.getItem("level1FinalScore");
+            console.log("Level 1 Score:", level1Score);
+
+            var level3Score = sessionStorage.getItem("level3FinalScore");
+            console.log("Level 3 Score:", level3Score);
+
+            var level3FinalTime = 60;
+            console.log("Level 3 Final Time:", level3FinalTime);
+
+            var level3ShotsMissed = sessionStorage.getItem("level3ShotsMissed");
+            console.log("Level 3 Shots Missed:", level3ShotsMissed);
+
+            var level2ShotsMissed = sessionStorage.getItem("level2ShotsMissed");
+            console.log("Level 2 Shots Missed:", level2ShotsMissed);
+
+            var level1ShotsMissed = sessionStorage.getItem("level1ShotsMissed");
+            console.log("Level 1 Shots Missed:", level1ShotsMissed);
+
+            var overallTime = parseInt(level1FinalTime) + parseInt(level2FinalTime) + parseInt(level3FinalTime);
+            console.log("Overall Time:", overallTime);
+
+            var TimePenalty = overallTime * 10;
+            console.log("Time Penalty:", TimePenalty);
+
+            var shotsMissed = parseInt(level1ShotsMissed) + parseInt(level2ShotsMissed) + parseInt(level3ShotsMissed);
+            console.log("Total Shots Missed:", shotsMissed);
+                console.log(shotsMissed);
+                var shotsMissedPen = shotsMissed * 10;
+                var flawlessRun = false;
+                var flawlessBonus = 0;
+                
+                if (shotsMissed <= 0) {
+                    flawlessRun = true;
+                    shotsMissed == 0;
+                    flawlessBonus = 1000;
+                }
+
+            var finalScore = parseInt(level3Score) + parseInt(level1Score) - parseInt(shotsMissedPen) - parseInt(TimePenalty) + parseInt(flawlessBonus);
+            console.log(finalScore);
+            var textContent = 
+                "You've done it " + playerName + "!\n\n" +
+                "Even though you're wanted by the law, you're free to start a new life outside Deadwood South.\n" +
+                `Your scores after each level add up to ${parseInt(level1Score) + parseInt(level3Score)} points.\n` +
+                "Time Taken: " + overallTime + "s -> -" + TimePenalty + " points\n" +
+                "Shots Missed: " + shotsMissed + " -> -" + shotsMissedPen + " points\n" +
+                "Flawless Run: " + flawlessRun + "\n"+
+                "Your final score: $" + finalScore + "\n" +
+                "Maybe try shooting the right guy next time!";
+            
+            if (finalScore >= parseInt(localStorage.getItem("1stPlaceScore")) || localStorage.getItem("1stPlaceScore") == null || localStorage.getItem("1stPlaceScore") == "null") {
+                var tempScore = localStorage.getItem("1stPlaceScore")
+                var tempSkin = localStorage.getItem("1stPlaceSkin")
+                var tempName = localStorage.getItem("1stPlaceName")
+                var tempScore2 = localStorage.getItem("2ndPlaceScore")
+                var tempSkin2 = localStorage.getItem("2ndPlaceSkin")
+                var tempName2 = localStorage.getItem("2ndPlaceName")
+                localStorage.setItem("1stPlaceName", playerName);
+                localStorage.setItem("1stPlaceSkin", selectedSkin);
+                localStorage.setItem("1stPlaceScore", finalScore);
+
+                localStorage.setItem("2ndPlaceName", tempName);
+                localStorage.setItem("2ndPlaceSkin", tempSkin);
+                localStorage.setItem("2ndPlaceScore", tempScore);
+
+
+                localStorage.setItem("3rdPlaceName", tempName2);
+                localStorage.setItem("3rdPlaceSkin", tempSkin2);
+                localStorage.setItem("3rdPlaceScore", tempScore2);
+                console.log("1");
+            }
+            if ((finalScore >= parseInt(localStorage.getItem("2ndPlaceScore")) || localStorage.getItem("2ndPlaceScore") == null || localStorage.getItem("2ndPlaceScore") == "null") && finalScore < parseInt(localStorage.getItem("1stPlaceScore"))) {
+                var tempScore2 = localStorage.getItem("2ndPlaceScore")
+                var tempSkin2 = localStorage.getItem("2ndPlaceSkin")
+                var tempName2 = localStorage.getItem("2ndPlaceName")
+                localStorage.setItem("2ndPlaceName", playerName);
+                localStorage.setItem("2ndPlaceSkin", selectedSkin);
+                localStorage.setItem("2ndPlaceScore", finalScore);
+
+
+                localStorage.setItem("3rdPlaceName", tempName2);
+                localStorage.setItem("3rdPlaceSkin", tempSkin2);
+                localStorage.setItem("3rdPlaceScore", tempScore2);
+
+                console.log("2");
+            }
+            if ((finalScore >= parseInt(localStorage.getItem("3rdPlaceScore")) || localStorage.getItem("3rdPlaceScore") == null || localStorage.getItem("3rdPlaceScore") == "null") && finalScore < parseInt(localStorage.getItem("2ndPlaceScore"))) {
+                localStorage.setItem("3rdPlaceName", playerName);
+                localStorage.setItem("3rdPlaceSkin", selectedSkin);
+                localStorage.setItem("3rdPlaceScore", finalScore);
+
+                console.log("3");
+            }
+
+            typeWriter(textContent);
+        } else {
+            console.log("nothing to display");
+        }
+
+        // Function to simulate typewriter effect
+        function typeWriter(text) {
+            let typeSound = new Audio("gameAssets/soundEffects/typewriter.mp3");
+            typeSound.loop = true;
+            typeSound.play();
+
+            var i = 0;
+            var speed = 35; // Adjust the speed as needed (milliseconds)
+            var typingInterval = setInterval(function () {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        textBox.innerHTML += '<br>'; // Add line break
+                    } else {
+                        textBox.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                } else {
+                    typeSound.pause();
+                    clearInterval(typingInterval);
+                    createHorse(); // Call createHorse function after all text is typed
+                    continueButton.style.opacity = 1;
+                }
+            }, speed);
+        }
+
+        const createHorse = function () {
+            // create horse element and define some attributes
+            const newHorse = document.createElement("div");
+            newHorse.hit = false;
+            newHorse.animFrame = 0;
+            newHorse.moveFrame = 0;
+            newHorse.classList.add("horse");
+            // add it to the DOM
+            gameScreen.appendChild(newHorse);
+
+            newHorse.style.top = `${document.getElementsByClassName("container")[0].offsetHeight - (newHorse.offsetHeight / 8)}px`;
+            console.log(document.getElementsByClassName("container"));
+            newHorse.style.left = `0px`;
+            var nextAnim = function () {
+                newHorse.animFrame += 1;
+                newHorse.style.backgroundImage = `url(gameAssets/horse/horseframe${newHorse.animFrame % 6}.png)`; // through the 4 animation frames
+            };
+            // Changes position of an enemy ( only works left to right )*
+            const nextMove = function () {
+                newHorse.moveFrame += 1;
+                newHorse.style.left = `${newHorse.moveFrame * window.innerWidth / 100}px`; // moves enemy by 15 pixels
+                // reaches the edge of the screen remove it
+                if (parseInt(newHorse.style.getPropertyValue('left'), 10) > (window.innerWidth)) {
+                    if (!newHorse.hit) {
+                        newHorse.hit = true;
+                        newHorse.remove();
+                    }
+                }
+            };
+            setInterval(nextMove, 20);
+            setInterval(nextAnim, 140);
+
+            // Event listener for the continue button
+            document.getElementById("continueButton").addEventListener("click", function () {
+
+                if (currentLevel == 1) {
+                    window.location.href = "level1.html";
+                } else if (currentLevel == 2) {
+                    window.location.href = "level2.html";
+                } else if (currentLevel == 3) {
+                    window.location.href = "level3.html";
+                } else if (currentLevel == 4) {
+                    window.location.href = "level4.html";
+                } else {
+                    window.location.href = "startScreen.html"
+                }
+
+            });
+
+
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.00, maximum-scale=2.00, minimum-scale=1.00">
+    <title>Deathwood South (game)</title>
+    <link rel="stylesheet" href="startScreen.css">
+</head>
+
+<body>
+    <div class="gameScreen">
+        <div class="side left"></div>
+        <div id="texture"></div>
+        <img src="gameAssets/logo.png" alt="Deathwood South Title" class="logo">
+        <img src="gameAssets/windmill.png" alt="Deathwood South Title" class="logo spin">
+        <img src="gameAssets/start.png" alt="Start Game" class="logo start" id="startButton">
+        <input type="text" id="sheriffName" placeholder="Enter Sheriff Name" class="input-box">
+        <div class="side right"></div>
+
+
+        <div class="dropdown-container">
+            <div id="characterChoice"><img src="gameAssets\skins\skin1.png" alt="" class="character"></div>
+            <div class="dropdown">
+                <span>Change Skin</span>
+                <div class="dropdown-content">
+                    <img src="gameAssets\skins\skin1.png" alt="Skin 1">
+                    <img src="gameAssets\skins\skin2.png" alt="Skin 2">
+                    <img src="gameAssets\skins\skin3.png" alt="Skin 3">
+                    <img src="gameAssets\skins\skin4.png" alt="Skin 4">
+                    <img src="gameAssets\skins\skin5.png" alt="Skin 5">
+                    <img src="gameAssets\skins\skin6.png" alt="Skin 6">
+                    <img src="gameAssets\skins\skin7.png" alt="Skin 7">
+
+                </div>
+            </div>
+        </div>
+        <div class="leaderboard">
+            <h1>Previous Sheriffs Hall of Fame</h1>
+            <ul id="leaderboardList"></ul>
+        </div>
+
+    </div>
+
+</body>
+<script>
+    // Get the start button element
+    var startButton = document.getElementById('startButton');
+    var sheriffNameInput = document.getElementById('sheriffName');
+    var dropdown = document.getElementsByClassName('dropdown');
+    const localStoragePrefix = "DeadwoodSouth_";
+    playerData = retrievePlayerData();
+    console.log(playerData);
+    // JavaScript to handle selection
+    document.addEventListener('DOMContentLoaded', function () {
+        var images = document.querySelectorAll('.dropdown-content img');
+        var characterImage = document.querySelector('.character');
+
+        images.forEach(function (img) {
+            img.addEventListener('click', function () {
+                // Remove 'selected' class from previously selected image
+                var prevSelected = document.querySelector('.dropdown-content img.selected');
+                if (prevSelected) {
+                    prevSelected.classList.remove('selected');
+                }
+
+                // Add 'selected' class to clicked image
+                img.classList.add('selected');
+
+                // Change the character image
+                var selectedSkin = img.getAttribute('src');
+                characterImage.setAttribute('src', selectedSkin);
+               
+            });
+
+            img.addEventListener('mouseover', function () {
+                // Show prompt box with character name
+                var characterName = img.getAttribute('title');
+                if (characterName) {
+                    alert(characterName);
+                }
+            });
+        });
+    });
+
+
+
+
+
+    startButton.addEventListener('click', function () {
+        // deal with user data input
+        if (sheriffNameInput.value.trim() !== "") {
+            // Store the sheriff name in sessionStorage
+            sessionStorage.setItem('sheriffName', sheriffNameInput.value.trim());
+
+
+            var selectedImage = document.querySelector('.dropdown-content img.selected');
+            console.log(selectedImage);
+            var selectedSkin = selectedImage ? selectedImage.getAttribute('src') : "gameAssets/skins/skin1.png";
+
+            sessionStorage.setItem('selectedSkin', selectedSkin);
+
+            // Navigate to betweenLevel.html
+            sessionStorage.setItem('currentLevel', 1);
+            window.location.href = 'betweenLevel.html';
+        }
+    });
+
+    function retrievePlayerData() {
+    const playerData = [];
+
+    // Retrieve top 3 scores from localStorage
+    const topPlayers = [
+        { score: localStorage.getItem("1stPlaceScore"), nameKey: "1stPlaceName", skinKey: "1stPlaceSkin" },
+        { score: localStorage.getItem("2ndPlaceScore"), nameKey: "2ndPlaceName", skinKey: "2ndPlaceSkin" },
+        { score: localStorage.getItem("3rdPlaceScore"), nameKey: "3rdPlaceName", skinKey: "3rdPlaceSkin" }
+    ];
+
+    // Iterate through the top players
+    for (const player of topPlayers) {
+        let playerName = localStorage.getItem(player.nameKey);
+        let selectedSkinPath = localStorage.getItem(player.skinKey);
+
+        if(selectedSkinPath == null || selectedSkinPath =="null"){
+            selectedSkinPath = "gameAssets/skins/skin1.png";
+        }
+        if(playerName == null || playerName == "null"){
+            playerName = " Name ";
+        }
+
+        let finalScore = player.score;
+        if(finalScore == null || finalScore == "null"){
+            finalScore = 0;
+        }
+
+        // Replace backslashes with forward slashes in the path
+        selectedSkinPath = selectedSkinPath.replace(/\\/g, '/');
+
+        // Adjust the path for skin1.png if necessary
+        if (selectedSkinPath === "skin1.png") {
+            selectedSkinPath = "gameAssets/skins/skin1.png";
+        }
+
+        // Extract the skin filename from the path
+        const selectedSkinFilename = selectedSkinPath.replace("skin0", "skin");
+
+        // Push the player data to the array
+        playerData.push({
+            playerName,
+            selectedSkin: selectedSkinFilename,
+            finalScore
+        });
+    }
+
+    return playerData;
+}
+
+    // Function to render leaderboard
+    function renderLeaderboard() {
+        const players = retrievePlayerData();
+
+        // Clear existing leaderboard
+        leaderboardList.innerHTML = "";
+
+        // Render top 3 players
+        players.forEach((player, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${index + 1}) ${player.playerName}</span><br> Score: ${player.finalScore || "0"}<br><img src="${player.selectedSkin}" alt="Player Skin">`;
+            leaderboardList.appendChild(li);
+        });
+    }
+
+    // Call renderLeaderboard function on page load
+    renderLeaderboard();
+
+</script>
+
+</html>

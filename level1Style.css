@@ -1,0 +1,180 @@
+* {
+  user-select: none; /* Prevents user from highlighting element on screen */
+  image-rendering: pixelated; /*pixelated art style rendering ensures nice looking images*/
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#texture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-image: url("gameAssets/texture.png");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: 1; /* Lower z-index */
+}
+
+
+#gameScreen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("gameAssets/level1background.png");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: 2; /* Higher z-index than #texture */
+}
+
+#gun {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20vw; /* Adjust size as needed */
+  pointer-events: none;
+  z-index: 999; /* This makes sure the gun is always above other objects even created ones so that it has that fps look */
+}
+
+.target {
+  width: 15vw; 
+  height: 15vw; 
+  background-image: url("gameAssets/tumbleweed.png");
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  z-index: 2; /* lower z index */
+}
+.archerytarget {
+  width: 15vw; 
+  height: 15vw; 
+  background-image: url("gameAssets/archerytarget.png");
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  z-index: 2; /* lower z index */
+}
+#countdown {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px 40px;
+  border-radius: 10px;
+  display: none; /* Initially hide the countdown element */
+}
+.trackUI {
+  background-color: black;
+  border-radius: 2vw;
+  width: 20%;
+  margin: 2%;
+  top: 2%;
+}
+.numberDisplay {
+  position: absolute;
+  font-size: 24px; 
+  font-weight: bold; 
+  color: #ffffff; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  z-index: 3; 
+  opacity: 1; 
+  transition: opacity 0.5s ease-out;
+}
+.levelEntry {
+  background-color: black;
+  color: #ffffff;
+  border-radius: 2vw;
+  width: 50%;
+  margin: 6%;
+  position: absolute;
+  top: 10%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  transition: opacity 1s ease-in-out;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 1vw;
+  z-index: 11;
+}
+.fadeOut {
+  opacity: 0;
+}
+
+#timer,
+#score, #tumblecount {
+  font-family: Arial, Helvetica, sans-serif, cursive;
+  font-size: 1vw;
+  color: #ffffff;
+  padding: 1vw 2vw;
+}
+
+#ammo {
+  font-family: Arial, Helvetica, sans-serif, cursive;
+  font-size: 2vw;
+  color: #000000;
+  width: 20%;
+  margin: 2%;
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  z-index: 1000;
+}
+
+#multiplier {
+  font-family: Arial, Helvetica, sans-serif, cursive;
+  font-size: 2vw;
+  color: #000000;
+  width: 20%;
+  margin: 2%;
+  position: absolute;
+  bottom: 2%;
+  right: 2%; /* Adjust the position to bottom right */
+  z-index: 1000;
+}
+#timer:before,
+#score:before,
+#ammo:before, #tumblecount:before, #multiplier:before {
+  content: "\23F0"; /* unicode emojis */
+  margin-right: 1vw;
+}
+
+#score:before {
+  content: "\1F480";
+}
+
+#ammo:before {
+  content: "\1F52B";
+}
+#tumblecount:before {
+  content: "\1F52B";
+}
+
+.spin {
+  opacity: 1;
+  animation: spin 6s linear infinite;
+}
+.targetSpin{
+  animation: targetSpin 1s infinite alternate;
+  
+}
+@keyframes targetSpin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-720deg);
+  }
+}

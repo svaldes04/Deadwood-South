@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deathwood South: Level 1</title>
+    <link rel="stylesheet" href="level1Style.css">
+    <link rel="stylesheet" href="level4Style.css">
+</head>
+
+<body>
+
+
+    <div id="gameScreen">
+        <div id="levelOverlay">
+            <audio id="backgroundMusic" loop>
+                <source src="gameAssets\level4assets\background_music.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div id="texture"></div>
+            <div class="levelEntry">
+                <p>Level 4: Train Heist Trackdown</p>
+                <p id="openingText"></p>
+            </div>
+            <div class="trackUI">
+                <div id="timer" id="timer">Time: <span id="timeDisplay">60</span> s</div>
+                <div id="score" id="score">Vet Bills: -$<span id="scoreDisplay">0</span></div>
+            </div>
+        </div>
+        <div id="gold"><span id="goldDisplay">$0</span></div>
+
+        <div id="ammo" id="ammo">Ammo: <span id="ammoDisplay">10</span></div>
+
+        <img src="gameAssets/gunaim.png" id="gun" alt="">
+        <div class="wanted-container">
+            <img class="wanted" src="gameAssets/level4assets/wantedJon.png" alt="jon wanted poster">
+            <img class="wanted" src="gameAssets/level4assets/wantedCarriage.png" alt="lost carriage poster">
+        </div>
+
+    </div>
+
+
+</body>
+<script src="level4script.js"></script>
+
+</html>

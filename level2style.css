@@ -1,0 +1,58 @@
+.cowboy{
+    background-image: url(gameAssets/cowboy/cowboy_0.png);
+    background-size: contain;
+    width: 10.42%;
+    aspect-ratio: 400 / 590;
+    position: absolute;
+    top:500px;
+    z-index: 5;
+}
+.sprite2{
+    background-image: url(gameAssets/sprite2/sprite2_0.png);
+    background-size: contain;
+    width: 10.42%;
+    aspect-ratio: 400 / 590;
+    position: absolute;
+    top:500px;
+    z-index: 5;
+}
+.oliver{
+    background-image: url(gameAssets/oliver/oliver_0.png);
+    background-size: contain;
+    width: 10.42%;
+    aspect-ratio: 400 / 590;
+    position: absolute;
+    top:500px;
+    z-index: 5;
+}
+.lad{
+    background-image: url(gameAssets/lad/lad_0.png);
+    background-size: contain;
+    width: 10.42%;
+    aspect-ratio: 400 / 590;
+    position: absolute;
+    top:500px;
+    z-index: 5;
+}
+
+#gameScreen {
+    background-image: url("gameAssets/level2background.png");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+#wanted{
+    position: absolute;
+    image-rendering: pixelated;
+    background-image: url("gameAssets/wantedLevel2.png");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    z-index: 6; /* Higher z-index than #texture */
+    width: 10.42%;
+    height: 27.8%;
+    top: 20px;
+    left: 88.5%;
+    
+}

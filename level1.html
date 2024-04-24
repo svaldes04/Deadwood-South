@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deathwood South: Level 1</title>
+    <link rel="stylesheet" href="level1Style.css">
+</head>
+
+<body>
+
+
+    <div id="gameScreen">
+
+        <div id="texture"></div>
+        <div class="levelEntry">
+            <p>Level 1: Tumbleweed Target Practice</p>
+            <p id = "openingText"></p>
+        </div>
+        <div class="trackUI">
+            <div id="timer" id="timer">Time: <span id="timeDisplay">30</span> s</div>
+            <div id="tumblecount">Tumbleweeds Needed: <span id="tumbleweedDisplay">20</span></div>
+            <div id="score" id="score">Score: <span id="scoreDisplay">0</span></div>
+        </div>
+        <div id="ammo" id="ammo">Ammo: <span id="ammoDisplay">10</span></div>
+
+        <img src="gameAssets/gunaim.png" id="gun" alt="">
+        <div id="countdown"></div>
+        <div id="multiplier">Multiplier: X<span id="multiplierDisplay">1</span></div>
+
+    </div>
+</body>
+<script src="level1Engine.js"></script>
+
+</html>
