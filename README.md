@@ -1,6 +1,7 @@
 Deadwood South - Carnival Shooter Game
 
-Try it out at (for better results run on Google Chrome): https://svaldes04.github.io/Deadwood-South
+Try it out at: https://svaldes04.github.io/Deadwood-South
+(For better results run on Google Chrome)
 
 A game by Sebastian and Samuel.
 
