@@ -1,5 +1,7 @@
 Deadwood South - Carnival Shooter Game
 
+Try it out at: https://svaldes04.github.io/Deadwood-South
+
 A game by Sebastian and Samuel.
 
 Deadwood South is a point-and-click carnival shooter game developed as project for class. Step into the shoes of the sheriff of Deadwood South and test your shooting skills in this thrilling game set in the Wild West.
