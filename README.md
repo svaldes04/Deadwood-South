@@ -21,6 +21,6 @@ Some of the assets used contain free-to-use copyrighted material and have been i
 - https://www.deviantart.com/akithefull/art/Gun-Pointed-At-Camera-PNG-943087203
 
 
-Art made/modified using https://www.pixilart.com/draw, and sound effects made using https://jummbus.bitbucket.io/
+Art made/modified using https://www.pixilart.com/draw, and sound effects + music made using https://jummbus.bitbucket.io/
 
-Created with CSS, HTML and JavaScript
+Created with CSS, HTML and JavaScript.
