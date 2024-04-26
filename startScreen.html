@@ -51,6 +51,12 @@
     const localStoragePrefix = "DeadwoodSouth_";
     playerData = retrievePlayerData();
     console.log(playerData);
+
+    // Play background music on entry
+    const background_music = new Audio("gameAssets/Music/StartScreen.mp3");
+    background_music.play();
+    background_music.loop = true;
+
     // JavaScript to handle selection
     document.addEventListener('DOMContentLoaded', function () {
         var images = document.querySelectorAll('.dropdown-content img');

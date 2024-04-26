@@ -43,8 +43,12 @@ function fadeOutEntry() {
 
 window.onload = fadeOutEntry;
 
+// Play background music and start timer after first click
+const background_music = new Audio("gameAssets/Music/FinalLevel.mp3");
 function playBackgroundMusic() {
   startTimer();
+  background_music.play();
+  background_music.loop = true;
   document.removeEventListener("click", playBackgroundMusic);
 }
 

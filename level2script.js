@@ -20,6 +20,10 @@ let enemyShot = false;
 let currentEnemyTarget = -1;
 let score = 0;
 
+// Play background music on entry
+const background_music = new Audio("gameAssets/Music/Level2.mp3");
+    background_music.play();
+    background_music.loop = true;
 
 // code to deal with gun movement
 function updateGunPosition(event) {

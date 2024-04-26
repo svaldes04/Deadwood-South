@@ -22,6 +22,11 @@ let multiplier = 1;
 let tumbleweedVal = 20;
 let shotsWithoutMiss = 0;
 
+// Play background music on entry
+const background_music = new Audio("gameAssets/Music/Tutorial.mp3");
+    background_music.play();
+    background_music.loop = true;
+
 // Function to fade out the message after 2 seconds
 function fadeOutEntry() {
   const levelEntry = document.querySelector(".levelEntry");
