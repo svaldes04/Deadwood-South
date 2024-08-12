@@ -10,6 +10,7 @@ A point-and-click style game, shoot moving targets by clicking on them before th
 
 <div align="center">
   <img src="gameAssets/level1-demo.GIF" alt="Level 1 gameplay demonstration" height="300" loop=infinite />
+  <img src="gameAssets/level2-demo.GIF" alt="Level 1 gameplay demonstration" height="300" loop=infinite />
 </div>
 
 ## Assets
