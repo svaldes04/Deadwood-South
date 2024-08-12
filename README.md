@@ -9,8 +9,8 @@ Play as the sheriff of Deadwood South, gain your sheriff's license and take down
 A point-and-click style game, shoot moving targets by clicking on them before the timer ends. Reload with [R] when you're out of ammo. Your score will increase by hitting targets on each level, but make sure to not miss any shots as this will decrease your final score. Some levels can end before the timer reaches zero, try to complete these as fast as you can. There are 2 endings in this game, depending on your performance during certain levels. Try replaying level 2 if you haven't achieved the alternate ending.
 
 <div align="center">
-  <img src="gameAssets/level1-demo.GIF" alt="Level 1 gameplay demonstration" height="300" loop=infinite />
-  <img src="gameAssets/level2-demo.GIF" alt="Level 1 gameplay demonstration" height="300" loop=infinite />
+  <img src="gameAssets/level1-demo.GIF" alt="Level 1 gameplay demonstration" height="300" width="450" loop=infinite />
+  <img src="gameAssets/level2-demo.GIF" alt="Level 1 gameplay demonstration" height="300" width="450" loop=infinite />
 </div>
 
 ## Assets
